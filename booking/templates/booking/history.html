@@ -1,0 +1,44 @@
+{% extends 'booking/base.html' %}
+
+{% block content %}
+    <div class="thank-you-message">
+        <p>Thank you for booking with us! We hope you enjoy the show.</p>
+    </div>
+
+    <h2>My Booking History</h2>
+
+    {% if bookings %}
+        <div class="booking-confirmation">
+            <p>Your bookings are listed below. You can also cancel any booking.</p>
+        </div>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Show</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Seats Booked</th>
+                    <th>Booking Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.show.title }}</td>
+                        <td>{{ booking.show.date }}</td>
+                        <td>{{ booking.show.time }}</td>
+                        <td>{{ booking.seats }}</td>
+                        <td>{{ booking.booking_time }}</td>
+                        <td>
+                            <a href="{% url 'cancel_booking' booking.id %}" class="btn btn-custom">Cancel Booking</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No bookings found!</p>
+    {% endif %}
+{% endblock %}

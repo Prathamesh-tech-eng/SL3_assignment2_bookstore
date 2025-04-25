@@ -1,0 +1,29 @@
+{% extends 'booking/base.html' %}
+
+{% block content %}
+<h2>{% if show %}Edit{% else %}Add{% endif %} Show</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Title:</label>
+        <input type="text" name="title" class="form-control" value="{{ show.title|default_if_none:'' }}">
+    </div>
+    <div class="mb-3">
+        <label>Description:</label>
+        <textarea name="description" class="form-control">{{ show.description|default_if_none:'' }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label>Date:</label>
+        <input type="date" name="date" class="form-control" value="{{ show.date|date:'Y-m-d' }}">
+    </div>
+    <div class="mb-3">
+        <label>Time:</label>
+        <input type="time" name="time" class="form-control" value="{{ show.time|time:'H:i' }}">
+    </div>
+    <div class="mb-3">
+        <label>Total Seats:</label>
+        <input type="number" name="total_seats" class="form-control" value="{{ show.total_seats|default_if_none:'' }}">
+    </div>
+    <button type="submit" class="btn btn-primary">{% if show %}Update{% else %}Create{% endif %}</button>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'booking/base.html' %}
+
+{% block content %}
+<h2>Available Shows</h2>
+<div class="row">
+    {% for show in shows %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ show.title }}</h5>
+                <p class="card-text">{{ show.description }}</p>
+                <p>Date: {{ show.date }}</p>
+                <p>Time: {{ show.time }}</p>
+                <p>Seats Available: {{ show.total_seats }}</p>
+                <a href="{% url 'book_show' show.id %}" class="btn btn-primary">Book Now</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
